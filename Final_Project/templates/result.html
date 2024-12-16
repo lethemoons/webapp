@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BodyMap - Your Personal Body Fat Checker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #FFFFFF;
+            color: #6b417e;
+            font-size: 16px;
+        }
+
+        header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 80px;
+            background-color: #6b417e;
+            box-shadow: 0 4px 12px #6b3d7f;
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #95c9cd;
+            margin-right: auto;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #95c9cd;
+            font-weight: 600;
+            padding: 8px 20px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #95c9cd;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #95c9cd;
+            color: white;
+        }
+
+        section {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .result-container {
+            max-width: 70%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e2e2f0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-container h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .result-container p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .result-container .category {
+            font-size: 20px;
+            font-weight: bold;
+            color: #6b417e;
+        }
+
+        .result-container .lifestyle-recommendations {
+            font-size: 18px;
+            color: #4a4a4a;
+            margin-top: 20px;
+        }
+
+        .result-container .body-fat-bar {
+            height: 30px;
+            width: 100%;
+            background-color: #d3d3d3;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .result-container .body-fat-bar .fill {
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .reference {
+            font-size: 14px;
+            color: #4a4a4a;
+            margin-top: 30px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">BodyMap</div>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('check') }}">Body Fat Check</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('home') }}">Explore</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h1>Your Body Fat Result</h1>
+    <div class="result-container">
+        <h2>Body Fat Percentage: <span id="bodyFatPercentage">{{ bodyfat_percentage }}%</span></h2>
+        <p>Your body fat percentage has been calculated using the measurements you provided. Based on this, you fat under the following category:</p>
+        <p class="category" id="category">Category: {{ category }}</p>
+
+        <!-- Visual Progress Bar -->
+        <div class="body-fat-bar">
+            <div class="fill" id="bodyFatBarFill" style="width: {{ bodyfat_percentage }}%; background-color: {% if bodyfat_percentage > 30 %} #ff4081 {% else %} #6b417e {% endif %};"></div>
+        </div>
+
+        <!-- Lifestyle Recommendations -->
+        <div class="lifestyle-recommendations">
+            <h3>Life Style Recommendations</h3>
+            <p id="recommendationText">{{ recommendation }}</p>
+        </div>
+
+        <!-- References -->
+        <div class="reference">
+            <p><strong>References:</strong></p>
+            <p>For further information on body fat categories and health implications, visit the following resources:</p>
+            <ul>
+                <li><a href="https://www.cdc.gov/healthyweight/assessing/bmi/adult_bmi/index.html" target="_blank">CDC - Body Mass Index (BMI) Categories</a></li>
+                <li><a href="https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm" target="_blank">National Heart, Lung, and Blood Institute</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 BodyMap. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

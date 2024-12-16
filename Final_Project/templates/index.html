@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BodyMap - Your Personal Body Fat Checker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #FFFFFF, #87CEEB); /* Gradasi putih ke biru laut */
+            color: #6b3d7f;
+            font-size: 16px;
+        }
+
+        header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 80px;
+            background-color: #f1f1f9;
+            box-shadow: 0 4px 12px #6b3d7f;
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #6b3d7f;
+            margin-right: auto;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #6b3d7f;
+            font-weight: 600;
+            padding: 8px 20px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #95c9cd;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            background: url('https://i.pinimg.com/736x/3d/a5/d9/3da5d9eb401333d78e26d1aaacb6b6d5.jpg') no-repeat center center/cover;
+            background-position: center 20%;
+        }
+
+        .hero-text {
+            width: 50%;
+            text-align: left;
+            color: white;
+            padding: 20px;
+            margin-left: 20px;
+        }
+
+        .hero-text h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* Tombol Body Fat Check */
+        .cta-btn {
+            background-color: #6b417e; /* Warna ungu */
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 18px;
+            border: 2px solid #6b417e; /* Border ungu */
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .cta-btn:hover {
+            
+            background-color: #95c9cd;
+        }
+    
+
+        .cta-btn:active {
+            background-color: #95c9cd; /* Biru muda saat klik */
+            border-color: #95c9cd; /* Sesuaikan border dengan warna biru */
+        }
+
+        /* Why BodyMap Section */
+        .why-body-map {
+            padding: 50px 80px;
+            background: linear-gradient(to bottom, #6b417e 0%, #9a6f9e 40%, #f1f1f9 100%);
+            color: #000;
+            text-align: center;
+        }
+
+        .why-body-map h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #f1f1f9;
+        }
+
+        .why-body-map h2 {
+            font-size: 20px;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #333;
+            padding: 0 20px;
+        }
+
+        /* Benefit Section */
+        .benefit {
+            padding: 50px 80px;
+            background: #F5F5F5;
+        }
+
+        .benefit h2 {
+            font-size: 48px;
+            margin-bottom: 40px;
+            color: #6b3d7f;
+            text-align: center;
+        }
+
+        .benefit .BodyMap {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .benefit-card {
+            background-color: #D3D3D3;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 250px;
+            transition: transform 0.3s;
+            color: #333;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .benefit-card img {
+            width: 80px;
+            margin-bottom: 15px;
+        }
+
+        .benefit-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .benefit-card p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #95c9cd;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">BodyMap</div>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('check') }}">Body Fat Check</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Explore</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-text">
+        <h1>BodyMap</h1>
+        <p>Navigate Your Body, Shape Your Lifestyle</p>
+        <!-- Tombol Body Fat Check -->
+        <a href="{{ url_for('check') }}" class="cta-btn">Body Fat Check</a>
+    </div>
+</section>
+
+<!-- Why BodyMap Section -->
+<section class="why-body-map">
+    <div class="why-body-map-text">
+        <h1>Why BodyMap?</h1>
+        <h2>BodyMap is a wellness-focused website designed to help you understand your body better. By estimating your body fat percentage, it provides personalized lifestyle recommendations, including diet and exercise plans, to help you achieve your health goals effectively!</h2>
+    </div>
+</section>
+
+<!-- Benefit Section -->
+<section class="benefit">
+    <h2>Benefits of BodyMap</h2>
+    <div class="BodyMap">
+        <div class="benefit-card">
+            <img src="https://img.icons8.com/color/80/000000/indicator.png" alt="Health Indicator">
+            <h3>Health Indicator</h3>
+            <p>BodyMap serves as a reliable indicator of your overall health by analyzing body fat percentage and composition.</p>
+        </div>
+
+        <div class="benefit-card">
+            <img src="https://img.icons8.com/color/80/000000/track.png" alt="Body Composition Monitoring">
+            <h3>Body Composition Monitoring</h3>
+            <p>Track changes in your body composition over time to stay informed about your progress and maintain balance.</p>
+        </div>
+
+        <div class="benefit-card">
+            <img src="https://img.icons8.com/color/80/000000/goal.png" alt="Performance and Quality of Life Optimization">
+            <h3>Performance and Quality of Life Optimization</h3>
+            <p>Receive tailored recommendations to enhance your physical performance and improve your overall quality of life.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 BodyMap. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

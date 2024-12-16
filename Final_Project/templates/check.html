@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BodyMap - Your Personal Body Fat Checker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #FFFFFF;
+            color: #6b417e;
+            font-size: 16px;
+        }
+
+        header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 20px 80px;
+            background-color: #6b417e;
+            box-shadow: 0 4px 12px #6b3d7f;
+        }
+
+        header .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #95c9cd;
+            margin-right: auto;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #95c9cd;
+            font-weight: 600;
+            padding: 8px 20px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #95c9cd;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #95c9cd;
+            color: white;
+        }
+
+        section {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 90%;  /* Lebar 90% dari halaman */
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #e2e2f0;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 48%;  /* Setiap form group mengambil setengah lebar */
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #FFFFFF;
+            background-color: #FFFFFF;
+            transition: background-color 0.3s ease, border 0.3s ease;
+        }
+
+        .form-group input:hover, .form-group select:hover {
+            background-color: #e0f2f1;
+            border: 1px solid #6b417e;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border: 1px solid #6b417e;
+            background-color: #e0f2f1;
+        }
+
+        form button {
+            width: 100%;
+            padding: 15px;
+            background-color: #6b417e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        form button:hover {
+            background-color: #95c9cd;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">BodyMap</div>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('check') }}">Body Fat Check</a></li>
+            <li><a href="{{ url_for('result') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('result') }}">Explore</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h1>Let's Start Check Your Body Fat!</h1>
+    <form action="{{ url_for('result') }}" method="POST">
+        <!-- Jenis Kelamin input -->
+        <div class="form-group">
+            <label for="Sex">Jenis Kelamin</label>
+            <select id="Sex" name="Sex" required>
+                <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                <option value="female">Perempuan</option>
+                <option value="male">Laki-laki</option>
+            </select>
+        </div>
+
+        <!-- Body Measurements -->
+        <div class="form-group">
+            <label for="Age">Umur</label>
+            <input type="number" id="Age" name="Age" placeholder="Umur" required>
+        </div>
+        <div class="form-group">
+            <label for="Weight">Berat Badan (kg)</label>
+            <input type="number" id="Weight" name="Weight" placeholder="Berat Badan (kg)" required>
+        </div>
+        <div class="form-group">
+            <label for="Height">Tinggi Badan (m)</label>
+            <input type="number" id="Height" name="Height" placeholder="Tinggi Badan (m)" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="Neck">Lingkar Leher (cm)</label>
+            <input type="number" id="Neck" name="Neck" placeholder="Lingkar Leher (cm)" required>
+        </div>
+        <div class="form-group">
+            <label for="Chest">Lingkar Dada (cm)</label>
+            <input type="number" id="Chest" name="Chest" placeholder="Lingkar Dada (cm)" required>
+        </div>
+        <div class="form-group">
+            <label for="Hip">Lingkar Pinggul (cm)</label>
+            <input type="number" id="Hip" name="Hip" placeholder="Lingkar Pinggul (cm)" required>
+        </div>
+        <div class="form-group">
+            <label for="Thigh">Lingkar Paha (cm)</label>
+            <input type="number" id="Thigh" name="Thigh" placeholder="Lingkar Paha (cm)" required>
+        </div>
+        <div class="form-group">
+            <label for="Abdomen">Lingkar Perut (cm)</label>
+            <input type="number" id="Abdomen" name="Abdomen" placeholder="Lingkar Perut (cm)" required>
+        </div>
+        <div class="form-group">
+            <label for="Knee">Lingkar Lutut (cm)</label>
+            <input type="number" id="Knee" name="Knee" placeholder="Lingkar Lutut (cm)" required>
+        </div>
+        </div>
+        <div class="form-group">
+            <label for="Wrist">Lingkar Pergelangan Tangan (cm)</label>
+            <input type="number" id="Wrist" name="Wrist" placeholder="Lingkar Pergelangan Tangan (cm)" required>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2024 BodyMap. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
